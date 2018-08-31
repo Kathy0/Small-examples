@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			width:1000px;
+			height:500px;
+			background-color: orange;
+			position:relative;
+		}
+		p{
+			
+			border-radius: 50%;
+			position:absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id = "map"></div>
+	<script>
+		//创建小球类
+		function Ball(x,y){
+			//设置left、top
+			this.x = x;
+			this.y = y;
+			//设置小球半径
+			this.r = Math.random()*20;
+			
+			//创建节点
+			this.dom = document.createElement("p");
+			//设置小球宽高
+			this.w = 2 * this.r;
+			this.h = 2 * this.r;
+
+			this.dom.style.width = this.w + "px";
+			this.dom.style.height = this.h + "px";
+			this.dom.style.top = this.y + "px";
+			this.dom.style.left = this.x + "px";
+			//初始透明度
+			this.touming = 1;
+			this.dom.style.opacity = this.touming ;
+			//设置随机色
+			this.a = parseInt(Math.random()*255);
+			this.b = parseInt(Math.random()*255);
+			this.c = parseInt(Math.random()*255);
+			this.dom.style.backgroundColor = "rgb("+this.a+","+this.b+","+this.c+")";
+			//上树
+			document.getElementById("map").appendChild(this.dom);
+			//将每一个实例添加到数组里
+			qiu.push(this)
+			//设置一个位移的
+			this.wx = Math.random()*10 -5 ;
+			this.wy = Math.random()*10 -5 ;
+		}
+		//创建一个小球数组
+		var qiu = []
+		Ball.prototype.update = function(){
+			this.touming -= 0.01;
+			this.w += 0.1;
+			this.h += 0.1;
+			this.x += this.wx;
+			this.y += this.wy;
+			this.dom.style.opacity = this.touming ;
+			this.dom.style.width = this.w + "px";
+			this.dom.style.height = this.h + "px";
+			this.dom.style.left = this.x + "px";
+			this.dom.style.top = this.y + "px";
+				
+		}
+		Ball.prototype.goDie = function(){
+			document.getElementById("map").removeChild(this.dom)
+			for(var i = 0; i < qiu.length ; i++){
+				if(qiu[i] === this){
+					qiu.splice(i,1)
+				}
+			}
+		}
+		//定时器
+		setInterval(function(){
+			for(var i = 0; i< qiu.length;i++){
+				qiu[i].update();
+				if(qiu[i].touming <= 0){
+					qiu[i].goDie();
+				}
+
+			}
+		},30)
+		// //传入x，y值
+		document.getElementById("map").onmousemove = function(ev){
+			new Ball(ev.clientX,ev.clientY)
+		}
+		
+	</script>
+</body>
+</html>

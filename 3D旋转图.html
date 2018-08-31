@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			div{
+				width:1000px;
+				height:300px;
+				border:1px solid red;
+				margin:50px auto;
+				position:relative;
+				/*设置3D场景*/
+				transform-style: preserve-3d;
+				/*设置景深效果*/
+				perspective: 1200px;
+				transform: rotateX(-10deg)
+			}
+			ul{
+				width:200px;
+				height:200px;
+				position:absolute;
+				top:50px;
+				left:400px;
+				/*建立3D场景*/
+				transform-style: preserve-3d;
+				/*设置景深*/
+				/*perspective: 1200px;*/
+				/*设置ul的初始角度*/
+				transform: rotateY(0deg);
+				/*添加过渡*/
+				transition: all 1s;
+			}
+			li{
+				width:200px;
+				height:200px;
+				position:absolute;
+				left:0;
+				top:0;
+			}
+			li:nth-child(1){
+				transform: rotateY(0deg)  translateZ(200px);
+			}
+			li:nth-child(2){
+				transform: rotateY(60deg) translateZ(200px);
+			}
+			li:nth-child(3){
+				transform: rotateY(120deg) translateZ(200px);
+			}
+			li:nth-child(4){
+				transform: rotateY(180deg) translateZ(200px);
+			}
+			li:nth-child(5){
+				transform: rotateY(240deg) translateZ(200px);
+			}
+			li:nth-child(6){
+				transform: rotateY(300deg) translateZ(200px);
+			}
+			a{
+				width:20px;
+				height:60px;
+				line-height:60px;
+				font-size:24px;
+				text-decoration: none;
+				text-align: center;	
+				color: #FFF;
+				position:absolute;
+				top:120px;
+				background-color: #333;	
+			}
+			.prev{
+				left:0;
+			}
+			.next{
+				right:0;
+			}
+			img{
+				width:200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li><img src="img/1.jpg" alt="" /></li>
+				<li><img src="img/2.jpg" alt="" /></li>
+				<li><img src="img/3.jpg" alt="" /></li>
+				<li><img src="img/4.jpg" alt="" /></li>
+				<li><img src="img/5.jpg" alt="" /></li>
+				<li><img src="img/6.jpg" alt="" /></li>
+			</ul>
+			<a class="prev" href="javascript:;">&lt;</a>
+			<a class="next" href="javascript:;">&gt;</a>
+		</div>
+		<script>
+			var oUl=document.getElementsByTagName("ul")[0];
+			var prev=document.getElementsByClassName("prev")[0]
+			var next=document.getElementsByClassName("next")[0]
+			var num = 0;
+			next.onclick=function(){
+				num++
+				oUl.style.transform ="rotateY("+num*-60+"deg)"
+			}
+			prev.onclick=function(){
+				num--
+				oUl.style.transform ="rotateY("+num*-60+"deg)"
+			}
+		</script>
+	</body>
+</html>

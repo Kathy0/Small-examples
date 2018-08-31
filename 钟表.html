@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			html,body{
+				background-color: #999;
+			}
+			.box{
+				width:300px;
+				height:300px;
+				background-image: radial-gradient(#d1d1d1,#f1f1f1);
+				margin:100px auto;
+				border:5px solid #fff;
+				border-radius: 50%;
+				position:relative;
+			}
+			ul{
+				position:absolute;
+				left:50%;
+				top:0;
+			}
+			li{
+				position:absolute;
+				width:3px;
+				height:6px;
+				background-color: #000;
+				transform-origin: center 150px;
+			}
+			li:nth-child(5n+1){
+				width:4px;
+				height:10px;
+			}
+			.s,.f,.m{
+				position:absolute;
+				left:150px;
+				bottom:150px;
+				transform-origin:center bottom;
+			}
+			.s{
+				width:5px;
+				height:50px;
+				background-color: #333;
+				transform: rotate(45deg);
+			}
+			.f{
+				width:5px;
+				height:80px;
+				background-color: #999;	
+			}
+			.m{
+				width:3px;
+				height:120px;
+				background-color: red;
+			}
+			
+			.box1{
+				width:10px;
+				height:10px;
+				background-color: #f00;
+				border-radius: 50%;
+				position:absolute;
+				top:50%;
+				left:50%;
+				margin-left: -5px;
+				margin-top: -5px;;
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class = "box">
+			<ul>
+			</ul>
+			<div class="box1"></div>
+			<div class="s"></div>
+			<div class="f"></div>
+			<div class="m"></div>
+		</div>
+		<script>
+			//获取ul标签
+			
+			var oUl=document.getElementsByTagName("ul")[0]
+			var s = document.getElementsByClassName("s")[0]
+			var f = document.getElementsByClassName("f")[0]
+			var m = document.getElementsByClassName("m")[0]
+			//循环插入60个刻度条
+			//定义一个变量来存储这些刻度
+			var str = ""
+			for(var i = 0; i < 60;i++){
+				str+="<li style = 'transform: rotate("+i*6+"deg)'></li>"
+			}
+			oUl.innerHTML=str
+			
+			setInterval(function(){
+				var time = new Date();
+				var js_s=time.getHours()
+				var js_f=time.getMinutes()
+				var js_m=time.getSeconds()
+				m.style.transform="rotate("+(js_m*6)+"deg)";
+				f.style.transform="rotate("+(js_f+js_m/60)*6+"deg)"
+				s.style.transform="rotate("+(js_s%12+js_f/60)*30+"deg)"
+			})
+			//获取当前时间
+			
+		</script>
+	</body>
+</html>

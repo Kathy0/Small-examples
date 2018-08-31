@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			body{
+				background-color: #e3e4e5;
+			}
+			ul{
+				width:400px;
+				height:120px;
+				margin:100px auto;
+				position:relative;
+			}
+			ul li{
+				width:100px;
+				height:100px;
+				border-radius:5px;
+				border-bottom:1px solid #a6a9b3;
+				box-shadow:0 30px 5px #d3d4d5;
+				background-image: repeating-linear-gradient(to top,#ececed,#d3d5db,#ececed);
+			}
+			.hour{
+				position:absolute;
+				left:0;
+				top:0;
+			}
+			.min{
+				position:absolute;
+				left:130px;
+				top:0;
+				
+			}
+			.miao{
+				position:absolute;
+				left:260px;
+				top:0;
+			}
+			.hour:before,.hour:after{
+				content: "";
+				position:absolute;
+				left:0;
+				top:0;
+				width:98px;
+				height:102px;
+				border:1px solid #a6a9b3;
+				border-radius:5px;
+			}
+			.hour:after{
+				height:104px;
+			}
+			.min:before,.min:after{
+				content: "";
+				position:absolute;
+				left:0;
+				top:0;
+				width:98px;
+				height:102px;
+				border:1px solid #a6a9b3;
+				border-radius:5px;
+			}
+			.min:after{
+				height:104px;
+			}
+			
+			.miao:before,.miao:after{
+				content: "";
+				position:absolute;
+				left:0;
+				top:0;
+				width:98px;
+				height:102px;
+				border:1px solid #a6a9b3;
+				border-radius:5px;
+			}
+			.miao:after{
+				height:104px;
+			}
+			p:first-child{
+				font-size:50px;
+				line-height:86px;
+				font-weight:bold;
+				text-align: center;
+				color: #52555a;
+			}
+			p:nth-child(2){
+				font-size:14px;
+				line-height:14px;
+				text-align: center;
+				color: #5b5e63;
+			}
+			.mask:last-child{
+				position:absolute;
+				top:48px;
+				width:100px;
+				height:1px;
+				background-color: #8e919c ;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class= "hour">
+				<p>14</p>
+				<p>时</p>
+				<p class="mask"></p>
+			</li>
+			<li class= "min">
+				<p>14</p>
+				<p>分</p>
+				<p class="mask"></p>
+			</li>
+			<li class= "miao">
+				<p>14</p>
+				<p>秒</p>
+				<p class="mask"></p>
+			</li>
+			
+		</ul>
+		<script src="js/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			
+			//封装函数，确保显示两位数字
+			function toDouble(num){
+				if(num<10){
+					return "0"+num
+				}else{
+					return "" +num
+				}
+			}
+			//用定时器包裹
+			setInterval(function(){
+				
+				//获取现在的时间
+				var time = new Date();
+			
+				//挨个获取小时，分钟，秒
+				var h = time.getHours();
+				var m = time.getMinutes();
+				var s = time.getSeconds();
+			
+				//将时间插入到相应的位置
+				$(".hour").children().first("p").text(toDouble(h))
+				$(".min").children().first("p").text(toDouble(m))
+				$(".miao").children().first("p").text(toDouble(s))
+				
+			})
+			
+		</script>
+	</body>
+</html>
